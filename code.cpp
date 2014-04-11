@@ -12,5 +12,8 @@
 
 int main(int argc, char* argv[]) {
 
+	int fdInput =argv[1];
+	int fdOutput=argv[2];
+	int memSize =argv[3];
 	return 0;
 }
