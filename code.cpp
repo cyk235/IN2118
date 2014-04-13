@@ -7,13 +7,20 @@
 #include <errno.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <unistd.h>
+
+void externalSort (int fdInput, uint64_t size, int fdOutput, uint64_t memSize) {
+
+
+}
 
 
 
 int main(int argc, char* argv[]) {
 
-	int fdInput =argv[1];
-	int fdOutput=argv[2];
+	int fdInput =open(argv[1],O_RDONLY);
+	int fdOutput=open(argv[2],O_WRONLY);
 	int memSize =argv[3];
+	externalSort (fdInput,64,fdOutput,memSize);
 	return 0;
 }
