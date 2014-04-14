@@ -10,10 +10,11 @@
 #include <unistd.h>
 #include <algorithm>
 #include <queue>
+#include <vector>
 
 void externalSort (int fdInput, uint64_t size, int fdOutput, uint64_t memSize) {
-	vector< vector<uint64_t> > SortRuns;
-	vector<uint64_t> IndivRun;
+	std::vector< std::vector<uint64_t> > SortRuns;
+	std::vector<uint64_t> IndivRun;
 	uint64_t x;
 	uint64_t cntsize=0;
 	while (!(read(fdInput, &x, sizeof(uint64_t)) < 0)) // divide and sort individual runs
@@ -37,7 +38,7 @@ void externalSort (int fdInput, uint64_t size, int fdOutput, uint64_t memSize) {
 		IndivRun.clear();
 	}
 	
-	vector<uint64_t> Result; // merge 
+	std::vector<uint64_t> Result; // merge 
 	uint64_t smallest=SortRuns[0].front();
 	int position=0;
 	while (SortRuns.size()>0) {  // find the smallest among the first elements of the runs
@@ -49,10 +50,10 @@ void externalSort (int fdInput, uint64_t size, int fdOutput, uint64_t memSize) {
 		}
 		Result.push_back(SortRuns[position].front());
 		SortRuns[position].erase(SortRuns[position].begin());
-		for (i =0; i < SortRuns.size();) { // remove runs with no element
+		for (int i =0; i < SortRuns.size();) { // remove runs with no element
 			if (SortRuns[i].size()<=0)
 			{
-				SortRun.erase(SortRun.begin()+i);
+				SortRuns.erase(SortRuns.begin()+i);
 			}
 			else
 			{
